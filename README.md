@@ -1,5 +1,7 @@
 # RequestStore::Sidekiq
 
+[![Build Status](https://travis-ci.org/madebylotus/request_store-sidekiq.svg?branch=master)](https://travis-ci.org/madebylotus/request_store-sidekiq)
+
 Provides an easy integration between [RequestStore](https://github.com/steveklabnik/request_store) and [Sidekiq](https://github.com/mperham/sidekiq).
 
 RequestStore allows you to easily create threadsafe code, and this middleware for Sidekiq brings that functionality to Sidekiq workers, or even ActiveJob backed Sidekiq.
