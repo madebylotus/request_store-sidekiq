@@ -1,15 +1,15 @@
 # RequestStore::Sidekiq
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/request_store/sidekiq`. To experiment with that code, run `bin/console` for an interactive prompt.
+Provides an easy integration between [RequestStore](https://github.com/steveklabnik/request_store) and [Sidekiq](https://github.com/mperham/sidekiq).
 
-TODO: Delete this and the text above, and describe your gem
+RequestStore allows you to easily create threadsafe code, and this middleware for Sidekiq brings that functionality to Sidekiq workers, or even ActiveJob backed Sidekiq.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'request_store-sidekiq'
+gem 'request_store-sidekiq', '~> 0.1'
 ```
 
 And then execute:
@@ -22,7 +22,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Rails
+
+If using Rails, the Sidekiq middleware is already inserted into the Sidekiq middleware stack for you automatically and there is nothing to do.
+
+### Without Rails
+
+Without Rails, you'll need to insert the middleware into the stack yourself.  In a Rack app, that might be in the `config.ru` file for instance.
+
+```ruby
+# insert middleware
+
+RequestStore::Sidekiq.add_custom_middleware!
+
+run MyRackApp
+```
 
 ## Development
 
@@ -32,10 +46,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/request_store-sidekiq. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/madebylotus/request_store-sidekiq. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
