@@ -5,7 +5,7 @@ describe RequestStore::Sidekiq do
     expect(RequestStore::Sidekiq::VERSION).not_to be nil
   end
 
-  describe '#insert_middleware' do
+  describe '#add_custom_middleware!' do
     subject { described_class }
 
     # Need to stub this out or we don't actually call #configure_server block
