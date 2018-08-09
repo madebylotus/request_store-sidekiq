@@ -10,7 +10,7 @@ module RequestStore
       end
 
       def store_request_store?(item)
-        ::RequestStore::Sidekiq.configuration.restore &&
+        ::RequestStore::Sidekiq.configuration.persist &&
           item['request_store'].blank?
       end
     end

@@ -14,19 +14,19 @@ RSpec.describe RequestStore::Sidekiq::ServerMiddleware do
     end
   end
 
-  shared_examples 'a restored request store' do
+  shared_examples 'a persisted request store' do
     before do
       # ClientMiddleware setup the store.
       job['request_store'] = store
     end
 
-    context 'when restoring is enabled' do
+    context 'when persistance is enabled' do
       before do
-        ::RequestStore::Sidekiq.configure { |config| config.restore = true }
+        ::RequestStore::Sidekiq.configure { |config| config.persist = true }
       end
 
       after do
-        ::RequestStore::Sidekiq.configure { |config| config.restore = false }
+        ::RequestStore::Sidekiq.configure { |config| config.persist = false }
       end
 
       it 'restores the request store' do
@@ -36,7 +36,7 @@ RSpec.describe RequestStore::Sidekiq::ServerMiddleware do
       end
     end
 
-    context 'when restoring is disabled' do
+    context 'when persistance is disabled' do
       it 'do not restores the request store' do
         subject.call(worker, job, queue) do
           expect(::RequestStore.store).to eq({})
@@ -54,7 +54,7 @@ RSpec.describe RequestStore::Sidekiq::ServerMiddleware do
     end
 
     it_behaves_like 'a cleared request store'
-    it_behaves_like 'a restored request store'
+    it_behaves_like 'a persisted request store'
   end
 
   context 'when the worker completes successfully' do
@@ -66,6 +66,6 @@ RSpec.describe RequestStore::Sidekiq::ServerMiddleware do
     end
 
     it_behaves_like 'a cleared request store'
-    it_behaves_like 'a restored request store'
+    it_behaves_like 'a persisted request store'
   end
 end

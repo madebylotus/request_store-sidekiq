@@ -15,10 +15,10 @@ module RequestStore
 
     # Configuration variables and defaults.
     class Configuration
-      attr_accessor :restore
+      attr_accessor :persist
 
       def initialize
-        @restore = false
+        @persist = false
       end
     end
   end

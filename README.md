@@ -44,8 +44,8 @@ run MyRackApp
 
 ```ruby
 RequestStore::Sidekiq.configure do |config|
-  # Enable store restoring a job execution.
-  config.restore = true
+  # Enable store persistance at job execution.
+  config.persist = true
 end
 ```
 

@@ -12,7 +12,7 @@ module RequestStore
       end
 
       def restore_request_store?(job)
-        ::RequestStore::Sidekiq.configuration.restore &&
+        ::RequestStore::Sidekiq.configuration.persist &&
           job['request_store'].present?
       end
     end
