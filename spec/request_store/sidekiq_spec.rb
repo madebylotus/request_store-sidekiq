@@ -16,7 +16,17 @@ describe RequestStore::Sidekiq do
     it 'added our middleware to the server stack' do
       subject.add_custom_middleware!
 
-      expect(::Sidekiq.server_middleware).to be_exists(RequestStore::Sidekiq::ServerMiddleware)
+      expect(::Sidekiq.server_middleware).to(
+        be_exists(RequestStore::Sidekiq::ServerMiddleware)
+      )
+    end
+
+    it 'added our middleware to the client stack' do
+      subject.add_custom_middleware!
+
+      expect(::Sidekiq.client_middleware).to(
+        be_exists(RequestStore::Sidekiq::ClientMiddleware)
+      )
     end
   end
 end

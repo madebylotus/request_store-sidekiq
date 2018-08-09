@@ -1,10 +1,19 @@
 module RequestStore
   module Sidekiq
     class ServerMiddleware
-      def call(worker, job, queue)
+      def call(_worker, job, _queue)
+        if restore_request_store?(job)
+          ::RequestStore.store.merge!(job['request_store'])
+        end
+
         yield
       ensure
         ::RequestStore.clear!
+      end
+
+      def restore_request_store?(job)
+        ::RequestStore::Sidekiq.configuration.persist &&
+          job['request_store'].present?
       end
     end
   end
