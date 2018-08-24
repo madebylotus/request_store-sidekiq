@@ -26,7 +26,7 @@ Or install it yourself as:
 
 ### Rails
 
-If using Rails, the Sidekiq middleware is already inserted into the Sidekiq middleware stack for you automatically and there is nothing to do.
+If using Rails, the Sidekiq middleware is (after you require this gem) already inserted into the Sidekiq middleware stack for you automatically and there is nothing to do.
 
 ### Without Rails
 
